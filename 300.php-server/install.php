@@ -1,6 +1,7 @@
 <?php
 // 若存在配置文件，则拒绝请求
-if (file_exists(__DIR__ . '/config.inc.php')) http_response_code(404);
+if (file_exists(__DIR__ . '/config.inc.php'))
+  http_response_code(404);
 ?>
 <?php
 define('__APP_NAME__', 'PhpServer');
@@ -201,36 +202,39 @@ $tables = [
   "
 ];
 // ?config: 配置页接受数据并更新配置数据
-if (isset($_GET['config'])) :
+if (isset($_GET['config'])):
   !isset($_GET['storageType']) ?: ($config['storage_config']['type'] = $_GET['storageType']); // 更新数据存储类型
   !isset($_GET['dbDriver']) ?: ($config['db_config']['driver'] = $_GET['dbDriver']); // 更新适配器
   $action = 'config';
   // [POST]?config: 验证配置信息
-  if ($_SERVER['REQUEST_METHOD'] == 'POST' && _get('storage_type') == 'db') :
+  if ($_SERVER['REQUEST_METHOD'] == 'POST' && _get('storage_type') == 'db'):
     try {
       $conn = \Doctrine\DBAL\DriverManager::getConnection(_get('db'));
       // 测试连接
-      $count = (int)$conn->fetchOne("SELECT COUNT(*) FROM	information_schema.TABLES WHERE	TABLE_SCHEMA = '{$config['db_config']['dbname']}' AND TABLE_NAME IN (" . "'" . implode(
+      $count = (int) $conn->fetchOne("SELECT COUNT(*) FROM	information_schema.TABLES WHERE	TABLE_SCHEMA = '{$config['db_config']['dbname']}' AND TABLE_NAME IN (" . "'" . implode(
         "','",
         array_map(function ($value) use ($config) {
           return $config['db_config']['prefix'] . $value;
         }, array_keys($tables))
       ) . "'" . ");");
       // 检测数据库中是否含有原有数据表
-      if ($count == sizeof($tables)) : $action = "start&has_old";
-      else : $action = "start";
+      if ($count == sizeof($tables)):
+        $action = "start&has_old";
+      else:
+        $action = "start";
       endif;
     } catch (Exception $e) {
       // 连接失败
       $excp = $e;
     }
-  else : $action = "start";
+  else:
+    $action = "start";
   endif;
 endif;
 // ?start: 安装页
-if (isset($_GET['start']) && !isset($_GET['has_old'])) :
+if (isset($_GET['start']) && !isset($_GET['has_old'])):
   $action = 'finish';
-  if ($_SERVER['REQUEST_METHOD'] == 'POST' && _get('storage_type') == 'db') :
+  if ($_SERVER['REQUEST_METHOD'] == 'POST' && _get('storage_type') == 'db'):
     try {
       $conn = \Doctrine\DBAL\DriverManager::getConnection($config['db_config']);
       $sql = "";
@@ -254,18 +258,18 @@ if (isset($_GET['start']) && !isset($_GET['has_old'])) :
   endif;
 endif;
 // ?finish 完成页
-if (isset($_GET['finish'])) :
-  if ($_SERVER['REQUEST_METHOD'] == 'POST') :
+if (isset($_GET['finish'])):
+  if ($_SERVER['REQUEST_METHOD'] == 'POST'):
     // 写入配置文件
     $config_content = "<?php return array(\n";
-    foreach ($config as $key => $value) :
-      if (is_array($value)) :
+    foreach ($config as $key => $value):
+      if (is_array($value)):
         $config_content .= "\t'{$key}' => array(\n";
-        foreach ($value as $child_key => $child_value) :
+        foreach ($value as $child_key => $child_value):
           $config_content .= "\t\t'{$child_key}' => '{$child_value}',\n";
         endforeach;
         $config_content .= "\t),\n";
-      else :
+      else:
         $config_content .= "\t'{$key}' => '{$value}',\n";
       endif;
     endforeach;
@@ -286,9 +290,9 @@ endif;
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title><?php echo _get('app_name'); ?> 安装程序</title>
   <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/bootstrap@3.4.1/dist/css/bootstrap.min.css">
+  <script src="https://unpkg.com/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://unpkg.com/bootstrap@3.4.1/dist/js/bootstrap.min.js"></script>
   <style>
     h1,
     h3,
@@ -352,13 +356,13 @@ endif;
   <div class="jumbotron text-center">
     <h1><strong><?php echo _get('app_name'); ?></strong></h1>
     <ol>
-      <li <?php if (!isset($_GET['finish']) && !isset($_GET['start']) && !isset($_GET['config'])) : ?> class="active" <?php endif; ?>><span>1</span>欢迎使用</li>
-      <li <?php if (isset($_GET['config'])) : ?> class="active" <?php endif; ?>><span>2</span>初始化配置</li>
-      <li <?php if (isset($_GET['start'])) : ?> class="active" <?php endif; ?>><span>3</span>开始安装</li>
-      <li <?php if (isset($_GET['finish'])) : ?> class="active" <?php endif; ?>><span>4</span>安装成功</li>
+      <li <?php if (!isset($_GET['finish']) && !isset($_GET['start']) && !isset($_GET['config'])): ?> class="active" <?php endif; ?>><span>1</span>欢迎使用</li>
+      <li <?php if (isset($_GET['config'])): ?> class="active" <?php endif; ?>><span>2</span>初始化配置</li>
+      <li <?php if (isset($_GET['start'])): ?> class="active" <?php endif; ?>><span>3</span>开始安装</li>
+      <li <?php if (isset($_GET['finish'])): ?> class="active" <?php endif; ?>><span>4</span>安装成功</li>
     </ol>
   </div>
-  <?php if (!isset($_GET['finish']) && !isset($_GET['start']) && !isset($_GET['config'])) : ?>
+  <?php if (!isset($_GET['finish']) && !isset($_GET['start']) && !isset($_GET['config'])): ?>
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -378,7 +382,7 @@ endif;
         </div>
       </div>
     </div>
-  <?php elseif (isset($_GET['config']) || isset($_GET['start'])) : ?>
+  <?php elseif (isset($_GET['config']) || isset($_GET['start'])): ?>
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
@@ -417,7 +421,7 @@ endif;
               </div>
               <div class="<?php echo _get('storage_type') == 'db' ? NULL : 'hidden' ?>">
                 <h3>数据库配置</h3>
-                <?php if (!empty($excp) && !empty($_POST)) : ?>
+                <?php if (!empty($excp) && !empty($_POST)): ?>
                   <div class="alert alert-danger" role="alert">
                     对不起，无法连接数据库，请先检查数据库配置再继续进行安装
                   </div>
@@ -425,7 +429,7 @@ endif;
                 <div class="form-group">
                   <label for="dbDriver">数据库适配器</label>
                   <select class="form-control" name="dbDriver" id="dbDriver">
-                    <option value="pdo_mysql" <?php echo  _get('db_driver') == 'pdo_mysql' ? "selected" : NULL; ?>>Pdo 驱动 Mysql 适配器</option>
+                    <option value="pdo_mysql" <?php echo _get('db_driver') == 'pdo_mysql' ? "selected" : NULL; ?>>Pdo 驱动 Mysql 适配器</option>
                     <option value="pdo_sqlite" <?php echo _get('db_driver') == 'pdo_sqlite' ? "selected" : NULL; ?>>Pdo 驱动 SQLite 适配器 (SQLite 3.x)</option>
                     <!-- <option value="mysqli"></option> -->
                     <!-- <option value="pdo_pgsql"></option> -->
@@ -492,8 +496,8 @@ endif;
                 <button type="submit" class="btn btn-primary">确认, 开始安装 »</button>
               </div>
             </div>
-            <?php if (isset($_GET['start'])) : ?>
-              <?php if (isset($_GET['has_old'])) : ?>
+            <?php if (isset($_GET['start'])): ?>
+              <?php if (isset($_GET['has_old'])): ?>
                 <h1>安装失败</h1>
                 <div class="alert alert-danger" role="alert">
                   <p>安装程序检查到原有数据表已经存在.</p>
@@ -503,7 +507,7 @@ endif;
                   <button type="submit" name="goahead" value="1" class="btn btn-primary">使用原有数据</button>
                 </div>
               <? endif ?>
-              <?php if (!empty($excp)) : ?>
+              <?php if (!empty($excp)): ?>
                 <div class="alert alert-danger" role="alert">
                   <h1>安装失败</h1>
                 </div>
@@ -514,23 +518,23 @@ endif;
       </div>
     </div>
     <script>
-      <?php if (isset($_GET['config'])) : ?>
+      <?php if (isset($_GET['config'])): ?>
         var storageType = document.config.storageType;
         var dbDriver = document.config.dbDriver;
-        storageType.onchange = function() {
+        storageType.onchange = function () {
           document.config.action = "./install.php?config&storageType=" + this.value;
           $('button[type="submit"]').click();
         }
-        dbDriver.onchange = function() {
+        dbDriver.onchange = function () {
           document.config.action = "install.php?config&dbDriver=" + this.value;
           $('button[type="submit"]').click();
         }
       <?php endif ?>
-      <?php if ((isset($_GET['config']) && sizeof($_GET) == 1 && in_array($action, ['start', 'start&has_old'])) || (isset($_GET['start']) && in_array($action, ['finish']))) : ?>
+      <?php if ((isset($_GET['config']) && sizeof($_GET) == 1 && in_array($action, ['start', 'start&has_old'])) || (isset($_GET['start']) && in_array($action, ['finish']))): ?>
         $('button[type="submit"]').click();
       <?php endif; ?>
     </script>
-  <?php elseif (isset($_GET['finish'])) : ?>
+  <?php elseif (isset($_GET['finish'])): ?>
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
