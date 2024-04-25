@@ -1,7 +1,6 @@
 <?php
 
 use Nwidart\Modules\Activators\FileActivator;
-use Nwidart\Modules\Commands;
 
 return [
 
@@ -27,26 +26,26 @@ return [
 
     'stubs' => [
         'enabled' => false,
-        'path' => base_path('vendor/nwidart/laravel-modules/src/Commands/stubs'),
+        'path' => base_path() . '/vendor/serVme/lumen-modules/src/Commands/stubs',
         'files' => [
-            'routes/web' => 'Routes/web.php',
-            'routes/api' => 'Routes/api.php',
-            'views/index' => 'Resources/views/index.blade.php',
-            'views/master' => 'Resources/views/layouts/master.blade.php',
+            'routes/web' => 'V1/Routes/web.php',
+            // 'routes/api' => 'Routes/api.php',
+            // 'views/index' => 'Resources/views/index.blade.php',
+            // 'views/master' => 'Resources/views/layouts/master.blade.php',
             'scaffold/config' => 'Config/config.php',
             'composer' => 'composer.json',
-            'assets/js/app' => 'Resources/assets/js/app.js',
-            'assets/sass/app' => 'Resources/assets/sass/app.scss',
-            'webpack' => 'webpack.mix.js',
-            'package' => 'package.json',
+            // 'assets/js/app' => 'Resources/assets/js/app.js',
+            // 'assets/sass/app' => 'Resources/assets/sass/app.scss',
+            // 'webpack' => 'webpack.mix.js',
+            // 'package' => 'package.json',
         ],
         'replacements' => [
             'routes/web' => ['LOWER_NAME', 'STUDLY_NAME'],
-            'routes/api' => ['LOWER_NAME'],
-            'webpack' => ['LOWER_NAME'],
-            'json' => ['LOWER_NAME', 'STUDLY_NAME', 'MODULE_NAMESPACE', 'PROVIDER_NAMESPACE'],
-            'views/index' => ['LOWER_NAME'],
-            'views/master' => ['LOWER_NAME', 'STUDLY_NAME'],
+            // 'routes/api' => ['LOWER_NAME'],
+            // 'webpack' => ['LOWER_NAME'],
+            'json' => ['LOWER_NAME', 'STUDLY_NAME', 'MODULE_NAMESPACE'],
+            // 'views/index' => ['LOWER_NAME'],
+            // 'views/master' => ['LOWER_NAME', 'STUDLY_NAME'],
             'scaffold/config' => ['STUDLY_NAME'],
             'composer' => [
                 'LOWER_NAME',
@@ -55,7 +54,6 @@ return [
                 'AUTHOR_NAME',
                 'AUTHOR_EMAIL',
                 'MODULE_NAMESPACE',
-                'PROVIDER_NAMESPACE',
             ],
         ],
         'gitkeep' => true,
@@ -102,93 +100,31 @@ return [
         */
         'generator' => [
             'config' => ['path' => 'Config', 'generate' => true],
-            'command' => ['path' => 'Console', 'generate' => true],
+            'command' => ['path' => 'Console', 'generate' => false],
             'migration' => ['path' => 'Database/Migrations', 'generate' => true],
-            'seeder' => ['path' => 'Database/Seeders', 'generate' => true],
-            'factory' => ['path' => 'Database/factories', 'generate' => true],
-            'model' => ['path' => 'Entities', 'generate' => true],
-            'routes' => ['path' => 'Routes', 'generate' => true],
-            'controller' => ['path' => 'Http/Controllers', 'generate' => true],
-            'filter' => ['path' => 'Http/Middleware', 'generate' => true],
-            'request' => ['path' => 'Http/Requests', 'generate' => true],
+            'seeder' => ['path' => 'Database/Seeds', 'generate' => true],
+            'factory' => ['path' => 'Database/Factories', 'generate' => true],
+            'model' => ['path' => 'Models', 'generate' => true],
+            'controller' => ['path' => 'V1/Http/Controllers', 'generate' => true],
+            'filter' => ['path' => 'V1/Http/Middleware', 'generate' => true],
+            'request' => ['path' => 'Http/Requests', 'generate' => false],
             'provider' => ['path' => 'Providers', 'generate' => true],
-            'assets' => ['path' => 'Resources/assets', 'generate' => true],
-            'lang' => ['path' => 'Resources/lang', 'generate' => true],
-            'views' => ['path' => 'Resources/views', 'generate' => true],
-            'test' => ['path' => 'Tests/Unit', 'generate' => true],
-            'test-feature' => ['path' => 'Tests/Feature', 'generate' => true],
+            'assets' => ['path' => 'Resources/assets', 'generate' => false],
+            'lang' => ['path' => 'Resources/lang', 'generate' => false],
+            'views' => ['path' => 'Resources/views', 'generate' => false],
+            'test' => ['path' => 'V1/Tests/Unit', 'generate' => true],
+            'test-feature' => ['path' => 'V1/Tests/Feature', 'generate' => true],
             'repository' => ['path' => 'Repositories', 'generate' => false],
-            'event' => ['path' => 'Events', 'generate' => false],
-            'listener' => ['path' => 'Listeners', 'generate' => false],
+            'event' => ['path' => 'Events', 'generate' => true],
+            'listener' => ['path' => 'Listeners', 'generate' => true],
             'policies' => ['path' => 'Policies', 'generate' => false],
-            'rules' => ['path' => 'Rules', 'generate' => false],
-            'jobs' => ['path' => 'Jobs', 'generate' => false],
+            'rules' => ['path' => 'V1/Http/Rules', 'generate' => true],
+            'jobs' => ['path' => 'Jobs', 'generate' => true],
             'emails' => ['path' => 'Emails', 'generate' => false],
             'notifications' => ['path' => 'Notifications', 'generate' => false],
             'resource' => ['path' => 'Transformers', 'generate' => false],
-            'component-view' => ['path' => 'Resources/views/components', 'generate' => false],
-            'component-class' => ['path' => 'View/Components', 'generate' => false],
         ],
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Package commands
-    |--------------------------------------------------------------------------
-    |
-    | Here you can define which commands will be visible and used in your
-    | application. If for example you don't use some of the commands provided
-    | you can simply comment them out.
-    |
-    */
-    'commands' => [
-        Commands\CommandMakeCommand::class,
-        Commands\ComponentClassMakeCommand::class,
-        Commands\ComponentViewMakeCommand::class,
-        Commands\ControllerMakeCommand::class,
-        Commands\DisableCommand::class,
-        Commands\DumpCommand::class,
-        Commands\EnableCommand::class,
-        Commands\EventMakeCommand::class,
-        Commands\JobMakeCommand::class,
-        Commands\ListenerMakeCommand::class,
-        Commands\MailMakeCommand::class,
-        Commands\MiddlewareMakeCommand::class,
-        Commands\NotificationMakeCommand::class,
-        Commands\ProviderMakeCommand::class,
-        Commands\RouteProviderMakeCommand::class,
-        Commands\InstallCommand::class,
-        Commands\ListCommand::class,
-        Commands\ModuleDeleteCommand::class,
-        Commands\ModuleMakeCommand::class,
-        Commands\FactoryMakeCommand::class,
-        Commands\PolicyMakeCommand::class,
-        Commands\RequestMakeCommand::class,
-        Commands\RuleMakeCommand::class,
-        Commands\MigrateCommand::class,
-        Commands\MigrateRefreshCommand::class,
-        Commands\MigrateResetCommand::class,
-        Commands\MigrateRollbackCommand::class,
-        Commands\MigrateStatusCommand::class,
-        Commands\MigrationMakeCommand::class,
-        Commands\ModelMakeCommand::class,
-        Commands\PublishCommand::class,
-        Commands\PublishConfigurationCommand::class,
-        Commands\PublishMigrationCommand::class,
-        Commands\PublishTranslationCommand::class,
-        Commands\SeedCommand::class,
-        Commands\SeedMakeCommand::class,
-        Commands\SetupCommand::class,
-        Commands\UnUseCommand::class,
-        Commands\UpdateCommand::class,
-        Commands\UseCommand::class,
-        Commands\ResourceMakeCommand::class,
-        Commands\TestMakeCommand::class,
-        Commands\LaravelModulesV6Migrator::class,
-        Commands\ComponentClassMakeCommand::class,
-        Commands\ComponentViewMakeCommand::class,
-    ],
-
     /*
     |--------------------------------------------------------------------------
     | Scan Path
@@ -215,14 +151,12 @@ return [
     */
 
     'composer' => [
-        'vendor' => 'nwidart',
+        'vendor' => 'serVme',
         'author' => [
-            'name' => 'Nicolas Widart',
-            'email' => 'n.widart@gmail.com',
+            'name' => 'serVme Dev',
+            'email' => 'dev@servmeco.com',
         ],
-        'composer-output' => false,
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Caching
@@ -233,12 +167,12 @@ return [
     */
     'cache' => [
         'enabled' => false,
-        'key' => 'laravel-modules',
+        'key' => 'lumen-modules',
         'lifetime' => 60,
     ],
     /*
     |--------------------------------------------------------------------------
-    | Choose what laravel-modules will register as custom namespaces.
+    | Choose what lumen-modules will register as custom namespaces.
     | Setting one to false will require you to register that part
     | in your own Service Provider class.
     |--------------------------------------------------------------------------
@@ -267,7 +201,7 @@ return [
     'activators' => [
         'file' => [
             'class' => FileActivator::class,
-            'statuses-file' => base_path('modules_statuses.json'),
+            'statuses-file' => storage_path('app/modules_statuses.json'),
             'cache-key' => 'activator.installed',
             'cache-lifetime' => 604800,
         ],
