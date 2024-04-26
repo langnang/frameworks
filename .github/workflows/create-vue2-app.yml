@@ -25,6 +25,7 @@ jobs:
 
       - name: Install and Build
         run: |
+          cd vue2-app
           yarn install
           yarn build
 
