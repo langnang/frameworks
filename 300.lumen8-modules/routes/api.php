@@ -14,11 +14,5 @@
 */
 
 $router->get('/', function () use ($router) {
-    // return $router->app->version();
-    return view('index');
-});
-$router->get('/module', function () use ($router) {
-    // return $router->app->version();
-    // dump(\Nwidart\Modules\Facades\Module::all());
-    return view('module');
+    return $router->app->version();
 });
