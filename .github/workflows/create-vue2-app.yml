@@ -19,13 +19,11 @@ jobs:
       - name: Create Vue@2 Project
         run: |
           npm install -g @vue/cli
-          vue create vue2-app
-        env:
-          VUE_CLI_BABEL_TRANSPILE_MODULES: true
+          vue create 200.vue-ui -d --merge
 
       - name: Install and Build
         run: |
-          cd vue2-app
+          cd 200.vue-ui
           yarn install
           yarn build
 
@@ -33,5 +31,5 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
           ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: vue2-app
-          FOLDER: vue2-app/dist
+          BRANCH: 200.vue-ui
+          FOLDER: 200.vue-ui/dist
