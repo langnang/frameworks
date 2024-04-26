@@ -27,9 +27,22 @@ jobs:
           yarn install
           yarn build
 
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.1.4
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: 200.vue-ui
-          FOLDER: 200.vue-ui/dist
+          # ftp server
+          server: ftpupload.net
+          # ftp username
+          username: b32_28202196
+          # ftp password
+          password: ${{ secrets.ftp_password }}
+          # local dir
+          local-dir: ./200.vue2-ui/dist/
+          # Path to upload to on the server. Must end with trailing slash /
+          server-dir: /frameworks.22web.org/htdocs/200.vue2-ui/
+          # File to Exclude
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github*/**
+            **/node_modules/**
