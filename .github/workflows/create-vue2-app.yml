@@ -19,11 +19,11 @@ jobs:
       - name: Create Vue@2 Project
         run: |
           npm install -g @vue/cli
-          vue create 200.vue-ui -d --merge
+          vue create 200.vue2-ui -d --merge
 
       - name: Install and Build
         run: |
-          cd 200.vue-ui
+          cd 200.vue2-ui
           yarn install
           yarn build
 
