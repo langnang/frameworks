@@ -4,7 +4,15 @@
 
 ## Node
 
+```sh
+npm init
+```
+
 ## PHP
+
+```sh
+composer init
+```
 
 - Laravel
 - Lumen
