@@ -15,12 +15,12 @@ title: 框架（Frameworks）
 
 ### CSS/UI
 
-- Bootstrap
-- Tailwind CSS
-- Foundation
+- [Bootstrap](https://www.bootcss.com/)
+- [Tailwind CSS](https://www.tailwindcss.cn/)
+- [Foundation](https://get.foundation/)
 - Bulma
 - UIKit
-- Materialise
+- Materialize
 - Skeleton
 - Open Props
 - Layui
@@ -30,6 +30,8 @@ title: 框架（Frameworks）
 - Element UI
 - Tachyons
 - Primer
+- Material Design for Bootstrap (MDB)
+- Material Design Lite Framework (MDL)
 
 ### JavaScript
 
@@ -85,9 +87,9 @@ npm init
 composer init
 ```
 
-- [Laravel](./300.laravel/)
-- [Lumen](./300.lumen/)
-- Symfony
+- [Laravel](./laravel/)
+- [Lumen](./lumen/)
+- [Symfony](https://symfony.com/)
 - ThinkPHP
 - Yii
 - CodeIgniter
@@ -102,6 +104,11 @@ composer init
 - Typo3
 - Flight
 - PHPixie
+
+### PHP Redevelop
+
+- [Laravel Modules]()
+- [Lumen Modules]()
 
 ## ASP.NET Code
 
