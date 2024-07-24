@@ -21,7 +21,6 @@ define('AUTH_TOKEN', 'encv1.VWZUSXNEUVdQVmlPbnVVTVRDZkxibC9aM3YwT21raVhpdXRBNGZo
 
 require_once __DIR__ . '/../Basic.php';
 
-var_dump(Basic::class);
 /*
 |--------------------------------------------------------------------------
 | Middleware
@@ -44,7 +43,9 @@ Basic::setAutoRoute(); // Automatic '/class/method' routing
 | Endpoint Routes
 |--------------------------------------------------------------------------
 */
+$prefix = dirname($_SERVER['PHP_SELF']);
 
+var_dump($prefix);
 Basic::route('GET', '/', function () { // Set homepage
     $page_title = 'Starter Application';
     Basic::view('home', compact('page_title'));

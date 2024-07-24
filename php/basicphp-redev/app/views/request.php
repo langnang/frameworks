@@ -1,7 +1,7 @@
 <?php
 // Show Header and Menu
-require_once 'template/header.php';
-require_once 'template/menu.php';
+require_once __DIR__ . '/template/header.php';
+require_once __DIR__ . '/template/menu.php';
 ?>
 <!-- Page Content -->
 <div class="row">
@@ -38,5 +38,5 @@ require_once 'template/menu.php';
 </div>
 <?php
 // Show Footer
-require_once 'template/footer.php';
+require_once __DIR__ . '/template/footer.php';
 ?>

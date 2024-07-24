@@ -1,3 +1,3 @@
 <?php
 
-require_once __DIR__ . '/app/app.php'; // Load Application
+require_once __DIR__ . '/app/index.php'; // Load Application

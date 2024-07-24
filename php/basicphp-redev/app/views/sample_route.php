@@ -1,7 +1,7 @@
 <?php
 // Show Header and Menu
-require_once 'template/header.php';
-require_once 'template/menu.php';
+require_once __DIR__ . '/template/header.php';
+require_once __DIR__ . '/template/menu.php';
 ?>
 <!-- Page Content -->
 <div class="container">
@@ -13,17 +13,17 @@ require_once 'template/menu.php';
 			<p>Templating is done using native PHP templating.</p>
 			<br />
 			<h4>Passing Escaped Data from Controller</h4>
-			<?php foreach ($person as $name => $age) : ?>
+			<?php foreach ($person as $name => $age): ?>
 				The name is <?= $name ?> and the age is <?= $age ?>.
 				<br />
 			<?php endforeach ?>
 			<br />
 			<h4>Using URL substring as parameter</h4>
-			<?php if (!empty($param1)) : ?>
+			<?php if (!empty($param1)): ?>
 				<p>The first paramter is <?= $param1 ?>.
 				<?php endif ?>
 				<br />
-				<?php if (!empty($param2)) : ?>
+				<?php if (!empty($param2)): ?>
 					The second paramter is <?= $param2 ?>.
 				</p>
 			<?php endif ?>
@@ -32,5 +32,5 @@ require_once 'template/menu.php';
 </div>
 <?php
 // Show Footer
-require_once 'template/footer.php';
+require_once __DIR__ . '/template/footer.php';
 ?>

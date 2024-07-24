@@ -7,7 +7,7 @@ $uri = $return['uri'] = urldecode(
     parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) ?? ''
 );
 
-// var_dump($_SERVER);
+var_dump($_SERVER);
 // echo PHP_EOL;
 // var_dump($uri);
 // echo PHP_EOL;
@@ -21,9 +21,19 @@ if (($uri !== '/' && $uri !== '/index.php') && sizeof($exp_uri) > 3) {
     // var_dump($_SERVER['SCRIPT_FILENAME']);
     // var_dump($_SERVER['PATH_TRANSLATED']);
     // var_dump(dirname($_SERVER['SCRIPT_FILENAME']));
-    $language = $exp_uri[1];
+    // $language = $exp_uri[1];
     // $dir = $exp_uri[1];
-    require_once __DIR__ . '/' . $language . '/index.php';
+    // var_dump($language);
+    $language = $exp_uri[1];
+    // var_dump($language);
+    // require_once __DIR__ . '/' . $language . '/index.php';
+    if (sizeof($exp_uri) == 3) {
+
+        require_once __DIR__ . '/' . $language . '/index.php';
+    } else if (sizeof($exp_uri) > 3) {
+        $framework = $exp_uri[2];
+        require_once __DIR__ . '/' . $language . '/' . $framework . '/index.php';
+    }
 } else {
     getfiles(dirname($_SERVER['SCRIPT_FILENAME']));
 }
