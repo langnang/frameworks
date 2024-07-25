@@ -105,6 +105,13 @@ composer init
 - Typo3
 - Flight
 - PHPixie
+- GoAOP
+- Flarum
+- Nova
+- Spiral
+- Themosis
+- Vanilo
+- Typecho
 
 ### PHP Redevelop
 
