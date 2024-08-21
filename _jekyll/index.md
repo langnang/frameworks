@@ -83,11 +83,15 @@ npm init
 
 ## PHP
 
+- [BasicPhp]
+- Typecho
+
+### Composer
+
 ```sh
 composer init
 ```
 
-- [BasicPhp]
 - [Laravel](./laravel/)
 - [Lumen](./lumen/)
 - [Symfony](https://symfony.com/)
@@ -111,7 +115,6 @@ composer init
 - Spiral
 - Themosis
 - Vanilo
-- Typecho
 
 **Features**
 
