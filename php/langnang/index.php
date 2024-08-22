@@ -3,12 +3,23 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+$app = new App\Core\Application();
 
-$router = new \App\Core\Router;
+require_once __DIR__ . '/app/helpers.php';
 
-var_dump($router);
+var_dump($app);
+var_dump(app('router'));
 
-$router->get('/', function () { });
+
+require_once __DIR__ . '/routes/api.php';
+require_once __DIR__ . '/routes/web.php';
 
 
-$router->run();
+// $router = new \App\Core\Router;
+
+// var_dump($router);
+
+// $router->get('/', function () { });
+
+
+// $router->run();
