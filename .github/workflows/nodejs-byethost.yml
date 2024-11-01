@@ -26,9 +26,12 @@ jobs:
           cd nodejs
           vue create created-vue2-ui -d --merge
 
+      - name: Migrate Configuration files
+        run: |
+          cp -r nodejs/vue2-ui nodejs/created-vue2-ui
+
       - name: Install && Build
         run: |
-          cp nodejs/vue2-ui nodejs/created-vue2-ui
           cd nodejs/created-vue2-ui
           yarn install
           npm run build
