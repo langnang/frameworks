@@ -53,46 +53,46 @@ jobs:
             **/.github*/**
             **/node_modules/**
 
-deploy_created_vuepress_docs:
-  name: 🎉 Deploy vuepress-docs to langnang.byethost32.com
-  runs-on: ubuntu-latest
-  steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v2
+  deploy_created_vuepress_docs:
+    name: 🎉 Deploy vuepress-docs to langnang.byethost32.com
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2
 
-    - name: Use Node.js 14.x
-      uses: actions/setup-node@v2
-      with:
-        node-version: 14.x
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v2
+        with:
+          node-version: 14.x
 
-    - name: Create VuePress App
-      run: |
-        npm install -g @vue/cli
-        cd nodejs
-        yarn create vuepress vuepress-docs
+      - name: Create VuePress App
+        run: |
+          npm install -g @vue/cli
+          cd nodejs
+          yarn create vuepress vuepress-docs
 
-    - name: Install && Build
-      run: |
-        cd nodejs/vuepress-docs
-        yarn install
-        npm run build
+      - name: Install && Build
+        run: |
+          cd nodejs/vuepress-docs
+          yarn install
+          npm run build
 
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-      with:
-        # ftp server
-        server: ftpupload.net
-        # ftp username
-        username: b32_28202196
-        # ftp password
-        password: ${{ secrets.ftp_password }}
-        # local dir
-        local-dir: ./nodejs/vuepress-docs/dist/
-        # Path to upload to on the server. Must end with trailing slash /
-        server-dir: /htdocs/frameworks/nodejs/vuepress-docs/
-        # File to Exclude
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/.github*/**
-          **/node_modules/**
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          # ftp server
+          server: ftpupload.net
+          # ftp username
+          username: b32_28202196
+          # ftp password
+          password: ${{ secrets.ftp_password }}
+          # local dir
+          local-dir: ./nodejs/vuepress-docs/dist/
+          # Path to upload to on the server. Must end with trailing slash /
+          server-dir: /htdocs/frameworks/nodejs/vuepress-docs/
+          # File to Exclude
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github*/**
+            **/node_modules/**
