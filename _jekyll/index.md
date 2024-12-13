@@ -93,8 +93,8 @@ npm init
 composer init
 ```
 
-- [Laravel](./laravel/)
-- [Lumen](./lumen/)
+- [Laravel](./composer/laravel/)
+- [Lumen](./composer/lumen/)
 - [Symfony](https://symfony.com/)
 - ThinkPHP
 - Yii
